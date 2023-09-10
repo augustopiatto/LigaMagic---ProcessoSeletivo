@@ -1,14 +1,11 @@
 <template>
   <div class="stepper">
     <div class="s__header">
-      <div class="sh__step-format" />
-      <slot name="item1">Formato</slot>
-      <div class="sh__step-format" />
-      <slot name="item2">Questionário</slot>
-      <div class="sh__step-format" />
-      <slot name="item3">Pagamento</slot>
-      <div class="sh__step-format" />
-      <slot name="item4">Torneio</slot>
+      <div v-for="item in items" :key="item" class="sh__step--whole">
+        <div class="shs__step-format" />
+        <div v-if="isLastItem(item)" class="shs__step-divider" />
+        <!-- <slot name="item1">{{ item }}</slot> -->
+      </div>
     </div>
     <div class="s__content">
       <slot name="content"></slot>
@@ -45,6 +42,9 @@ export default {
     };
   },
   methods: {
+    isLastItem(item) {
+      return item !== this.items[this.items.length - 1];
+    },
     next() {
       this.step += 1;
     },
@@ -66,11 +66,22 @@ export default {
     flex: row;
     border: 1px solid;
 
-    .sh__step-format {
-      border-radius: 8px;
-      width: 50px;
-      height: 50px;
-      background-color: grey;
+    .sh__step--whole {
+      display: flex;
+      width: 100%;
+
+      .shs__step-format {
+        border-radius: 8px;
+        width: 50px;
+        height: 50px;
+        background-color: grey;
+      }
+      .shs__step-divider {
+        border-top: 20px solid white;
+        border-bottom: 20px solid white;
+        flex: 1;
+        background-color: grey;
+      }
     }
   }
   .s__content {
