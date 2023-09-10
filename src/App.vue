@@ -1,5 +1,5 @@
 <template>
-  <Stepper />
+  <Stepper></Stepper>
 </template>
 
 <script setup>
