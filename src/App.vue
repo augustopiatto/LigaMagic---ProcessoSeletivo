@@ -1,7 +1,7 @@
 <template>
-  <Stepper></Stepper>
+  <MyStepper></MyStepper>
 </template>
 
 <script setup>
-import Stepper from "./components/Stepper.vue";
+import MyStepper from "./components/MyStepper.vue";
 </script>

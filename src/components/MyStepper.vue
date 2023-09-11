@@ -12,29 +12,26 @@
     </div>
     <div class="s__actions">
       <slot name="actions">
-        <button class="button secondary" @click="close">Fechar</button>
-        <button v-if="step < items.length" class="button primary" @click="next">
-          Avançar
-        </button>
-        <button
-          v-if="step === items.length"
-          class="button primary"
-          @click="submit"
-        >
-          Enviar
-        </button>
+        <MyButton class="sa__secondary" @click="previous">Fechar</MyButton>
+        <MyButton class="sa__primary" @click="next">Avançar</MyButton>
+        <MyButton class="sa__primary" @click="submit">Enviar</MyButton>
       </slot>
     </div>
   </div>
 </template>
 
 <script>
+import MyButton from "./MyButton.vue";
+
 export default {
   props: {
     items: {
       default: ["Step 1", "Step 2", "Step 3"],
       type: Array,
     },
+  },
+  components: {
+    MyButton,
   },
   data() {
     return {
@@ -46,7 +43,18 @@ export default {
       return item !== this.items[this.items.length - 1];
     },
     next() {
-      this.step += 1;
+      if (this.step <= this.items.length) {
+        this.step += 1;
+      }
+    },
+    previous() {
+      if (this.step >= 1) {
+        this.step -= 1;
+      }
+    },
+    submit() {
+      console.log("oi");
+      return;
     },
   },
 };
@@ -93,6 +101,15 @@ export default {
   .s__actions {
     display: flex;
     justify-content: space-between;
+
+    .sa__primary {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+    }
+    .sa__secondary {
+      border: -2px solid grey;
+    }
   }
 }
 </style>
