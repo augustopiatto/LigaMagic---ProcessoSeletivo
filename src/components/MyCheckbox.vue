@@ -1,11 +1,6 @@
 <template>
   <div class="my-checkbox">
-    <input
-      v-model="model"
-      type="checkbox"
-      class="mc__checkbox"
-      :value="value"
-    />
+    <input v-model="model" type="checkbox" class="mc__input" :value="value" />
     <span class="mc__label">
       <slot> Check me </slot>
     </span>
@@ -43,14 +38,14 @@ export default {
   align-items: center;
   margin: 8px 0;
 
-  .mc__checkbox {
+  .mc__input {
     height: 25px;
     width: 25px;
     border-radius: 2px;
   }
   .mc__label {
-    font-size: 20px;
-    line-height: 25px;
+    font-size: 18px;
+    line-height: 20px;
     margin-left: 4px;
   }
 }
