@@ -3,16 +3,16 @@
     <div class="s__header">
       <div v-for="item in items" :key="item" class="sh__step--whole">
         <div class="shs__step-format" />
-        <div v-if="isLastItem(item)" class="shs__step-divider" />
+        <!-- <div v-if="isLastItem(item)" class="shs__step-divider" /> -->
         <!-- <slot name="item1">{{ item }}</slot> -->
       </div>
     </div>
     <div class="s__content">
-      <slot name="content"></slot>
+      <slot name="content" :step="currentStep" />
     </div>
     <div class="s__actions">
       <slot name="actions">
-        <MyButton class="sa__secondary" @click="previous">Fechar</MyButton>
+        <MyButton class="sa__secondary" @click="previous">Voltar</MyButton>
         <MyButton class="sa__primary" @click="next">Avançar</MyButton>
         <MyButton class="sa__primary" @click="submit">Enviar</MyButton>
       </slot>
@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      step: 1,
+      currentStep: 1,
     };
   },
   methods: {
@@ -43,13 +43,13 @@ export default {
       return item !== this.items[this.items.length - 1];
     },
     next() {
-      if (this.step <= this.items.length) {
-        this.step += 1;
+      if (this.currentStep <= this.items.length) {
+        this.currentStep += 1;
       }
     },
     previous() {
-      if (this.step >= 1) {
-        this.step -= 1;
+      if (this.currentStep >= 1) {
+        this.currentStep -= 1;
       }
     },
     submit() {

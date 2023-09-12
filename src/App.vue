@@ -1,17 +1,24 @@
 <template>
-  <MyStepper>
-    <template v-slot:content>
-      <!-- step1
-      <MyCheckbox v-model="checkboxValue" value="Standard">Standard</MyCheckbox>
-      <MyCheckbox v-model="checkboxValue" value="Modern">Modern</MyCheckbox>
-      <MyCheckbox v-model="checkboxValue" value="Pauper">Pauper</MyCheckbox> -->
-      <!-- step 2
-      <MyRadio v-model="radioValue" :items="radioItems"
-        >Você sabe o que é Circuito LigaMagic?</MyRadio
-      > -->
-      <!-- step 3
-      <MyTextField v-model="name">Nome</MyTextField> -->
-      <MyDateField v-model="date">Escolha uma data</MyDateField>
+  <MyStepper :items="steps">
+    <template v-slot:content="{ step }">
+      <div v-if="step === 1">
+        <MyCheckbox v-model="checkboxValue" value="Standard"
+          >Standard</MyCheckbox
+        >
+        <MyCheckbox v-model="checkboxValue" value="Modern">Modern</MyCheckbox>
+        <MyCheckbox v-model="checkboxValue" value="Pauper">Pauper</MyCheckbox>
+      </div>
+      <div v-if="step === 2">
+        <MyRadio v-model="radioValue" :items="radioItems"
+          >Você sabe o que é Circuito LigaMagic?</MyRadio
+        >
+      </div>
+      <div v-if="step === 3">
+        <MyTextField v-model="name">Nome</MyTextField>
+      </div>
+      <div v-if="step === 4">
+        <MyDateField v-model="date">Escolha uma data</MyDateField>
+      </div>
     </template>
   </MyStepper>
 </template>
@@ -41,12 +48,8 @@ export default {
         { label: "Não", value: "no" },
       ],
       radioValue: "",
+      steps: ["Formato", "Questionário", "Pagamento", "Torneio"],
     };
-  },
-  watch: {
-    date() {
-      console.log(this.date);
-    },
   },
 };
 </script>
