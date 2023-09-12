@@ -9,7 +9,7 @@
       <MyRadio v-model="radioValue" :items="radioItems"
         >Você sabe o que é Circuito LigaMagic?</MyRadio
       > -->
-      <MyTextField></MyTextField>
+      <MyTextField v-model="name">Nome</MyTextField>
     </template>
   </MyStepper>
 </template>
@@ -30,12 +30,18 @@ export default {
   data() {
     return {
       checkboxValue: [],
+      name: "",
       radioItems: [
         { label: "Sim", value: "yes" },
         { label: "Não", value: "no" },
       ],
       radioValue: "",
     };
+  },
+  watch: {
+    name() {
+      console.log(this.name);
+    },
   },
 };
 </script>
