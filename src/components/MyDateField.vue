@@ -1,12 +1,13 @@
 <template>
-  <div class="my-text-field">
-    <span class="mtf__title">
-      <slot> Field </slot>
+  <div class="my-date-field">
+    <span class="mdf__title">
+      <slot> Date </slot>
     </span>
     <input
-      v-model="text"
-      class="mtf__input"
-      @input="$emit('update:modelValue', text)"
+      v-model="date"
+      type="date"
+      class="mdf__input"
+      @change="$emit('update:modelValue', date)"
     />
   </div>
 </template>
@@ -15,28 +16,30 @@
 export default {
   data() {
     return {
-      text: "",
+      date: "",
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.my-text-field {
+.my-date-field {
   display: flex;
   flex-direction: column;
   gap: 8px;
 
-  .mtf__title {
+  .mdf__title {
     font-size: 20px;
     font-weight: 600;
   }
 
-  .mtf__input {
+  .mdf__input {
     border: 1px solid;
     border-radius: 4px;
     padding: 8px 16px;
     font-size: 16px;
+    max-width: 300px;
+    min-width: 100px;
   }
 }
 </style>
