@@ -1,5 +1,5 @@
 <template>
-  <button class="button" :disabled="disabled">
+  <button class="button" :class="{ disabled: disabled }" :disabled="disabled">
     <slot> Click Me </slot>
   </button>
 </template>
@@ -25,5 +25,9 @@ export default {
   border-radius: 4px;
   border: -1px solid;
   cursor: pointer;
+}
+
+.button.disabled {
+  cursor: auto;
 }
 </style>

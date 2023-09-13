@@ -26,6 +26,8 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  max-width: 300px;
+  min-width: 100px;
 
   .mtf__title {
     font-size: 20px;

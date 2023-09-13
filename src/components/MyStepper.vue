@@ -222,6 +222,7 @@ export default {
     .sa__primary.secondary {
       font-size: 12px;
       padding: 12px 18px;
+      color: black;
     }
 
     .sa__secondary.secondary {
@@ -232,10 +233,9 @@ export default {
       font-size: 12px;
       padding: 12px 18px;
       background-color: white;
-      color: black;
     }
 
-    .button.secondary:hover {
+    .button.secondary:hover:not(:disabled) {
       background-color: rgb(219, 219, 219);
     }
   }
