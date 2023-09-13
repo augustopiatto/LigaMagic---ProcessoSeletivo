@@ -17,7 +17,7 @@
         <MyTextField v-model="name">Nome</MyTextField>
       </div>
       <div v-show="step === 3">
-        <MyStepper :items="secondarySteps">
+        <MyStepper :items="secondarySteps" secondary>
           <template v-slot:content="{ step }">
             <div v-show="step === 0">
               <MyDateField v-model="standardDate">Escolha uma data</MyDateField>

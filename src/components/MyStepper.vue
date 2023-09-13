@@ -1,12 +1,21 @@
 <template>
   <div class="stepper">
-    <div class="s__header">
-      <div v-for="(item, idx) in items" :key="item" class="sh__step--whole">
+    <div class="s__header" :class="{ secondary: secondary }">
+      <div
+        v-for="(item, idx) in items"
+        :key="item"
+        class="sh__step--whole"
+        :class="{ active: idx < currentStep, secondary: secondary }"
+      >
         <div
           class="shs__step--format"
-          :class="{ active: idx === currentStep }"
+          :class="{ active: idx === currentStep, secondary: secondary }"
         />
-        <span class="shs__step--title">{{ item }}</span>
+        <span
+          class="shs__step--title"
+          :class="{ active: idx === currentStep, secondary: secondary }"
+          >{{ item }}</span
+        >
       </div>
     </div>
     <div class="s__content">
@@ -40,6 +49,10 @@ export default {
       default: ["Step 1", "Step 2", "Step 3"],
       type: Array,
     },
+    secondary: {
+      required: false,
+      type: Boolean,
+    },
   },
   components: {
     MyButton,
@@ -55,9 +68,6 @@ export default {
     },
   },
   methods: {
-    isLastItem(item) {
-      return item !== this.items[this.items.length - 1];
-    },
     next() {
       if (this.currentStep <= this.items.length - 2) {
         this.currentStep += 1;
@@ -87,6 +97,7 @@ export default {
   gap: 16px;
   min-width: 320px;
 
+  // Estilos primários
   .s__header {
     display: flex;
     align-items: center;
@@ -117,9 +128,9 @@ export default {
 
       .shs__step--title {
         margin-top: 8px;
-        text-align: center;
       }
     }
+
     .sh__step--whole:not(:last-child):after {
       content: "";
       background-color: grey;
@@ -130,6 +141,60 @@ export default {
       left: 50%;
     }
   }
+
+  // Estilos secundários
+  .s__header.secondary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: none;
+    box-shadow: none;
+
+    .sh__step--whole.secondary {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 0;
+      position: relative;
+      width: 100%;
+
+      .shs__step--format.secondary {
+        border-radius: 0;
+        width: 0;
+        height: 20px;
+        background-color: none;
+        z-index: none;
+      }
+      .shs__step--format.active.secondary {
+        border: 0;
+      }
+
+      .shs__step--title.secondary {
+        margin-top: 0;
+        position: absolute;
+        transform: translateY(-50%);
+      }
+
+      .shs__step--title.active.secondary {
+        font-size: 18px;
+        font-weight: 600;
+      }
+    }
+
+    .sh__step--whole.secondary:not(:last-child):after {
+      content: "";
+      background-color: rgb(194, 194, 194);
+      margin-top: 15px;
+      height: 20px;
+      position: absolute;
+      width: 100%;
+      left: 50%;
+    }
+    .sh__step--whole.active.secondary:not(:last-child):after {
+      background-color: grey;
+    }
+  }
+
   .s__content {
     padding: 8px 24px;
     min-height: 200px;
