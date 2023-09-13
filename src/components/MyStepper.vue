@@ -1,5 +1,5 @@
 <template>
-  <div class="stepper">
+  <div class="stepper" :class="{ secondary: secondary }">
     <div class="s__header" :class="{ secondary: secondary }">
       <div
         v-for="(item, idx) in items"
@@ -21,18 +21,27 @@
     <div class="s__content">
       <slot name="content" :step="currentStep" />
     </div>
-    <div class="s__actions">
+    <div class="s__actions" :class="{ secondary: secondary }">
       <slot name="actions">
         <MyButton
           class="sa__secondary"
+          :class="{ secondary: secondary }"
           :disabled="this.currentStep === 0"
           @click="previous"
           >Voltar</MyButton
         >
-        <MyButton v-if="!isLastStep" class="sa__primary" @click="next"
+        <MyButton
+          v-if="!isLastStep"
+          class="sa__primary"
+          :class="{ secondary: secondary }"
+          @click="next"
           >Avançar</MyButton
         >
-        <MyButton v-if="isLastStep" class="sa__primary" @click="submit"
+        <MyButton
+          v-if="isLastStep"
+          class="sa__primary"
+          :class="{ secondary: secondary }"
+          @click="submit"
           >Enviar</MyButton
         >
       </slot>
@@ -87,6 +96,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// Estilos primários
 .stepper {
   display: flex;
   flex-direction: column;
@@ -97,7 +107,6 @@ export default {
   gap: 16px;
   min-width: 320px;
 
-  // Estilos primários
   .s__header {
     display: flex;
     align-items: center;
@@ -142,28 +151,44 @@ export default {
     }
   }
 
-  // Estilos secundários
-  .s__header.secondary {
+  .s__content {
+    padding: 16px 24px;
+    min-height: 200px;
+  }
+
+  .s__actions {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    padding: 24px;
+
+    .sa__primary {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+    }
+
+    .sa__secondary {
+      border: 2px solid grey;
+      box-sizing: border-box;
+    }
+  }
+}
+
+// Estilos secundários
+.stepper.secondary {
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  min-width: 260px;
+
+  .s__header.secondary {
     border-bottom: none;
     box-shadow: none;
 
     .sh__step--whole.secondary {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 16px 0;
-      position: relative;
-      width: 100%;
-
       .shs__step--format.secondary {
-        border-radius: 0;
         width: 0;
         height: 20px;
-        background-color: none;
-        z-index: none;
       }
       .shs__step--format.active.secondary {
         border: 0;
@@ -184,34 +209,34 @@ export default {
     .sh__step--whole.secondary:not(:last-child):after {
       content: "";
       background-color: rgb(194, 194, 194);
-      margin-top: 15px;
-      height: 20px;
-      position: absolute;
-      width: 100%;
-      left: 50%;
     }
     .sh__step--whole.active.secondary:not(:last-child):after {
       background-color: grey;
     }
   }
 
-  .s__content {
-    padding: 8px 24px;
-    min-height: 200px;
-  }
+  .s__actions.secondary {
+    padding: 16px;
+    border-bottom: 1px solid rgb(219, 219, 219);
 
-  .s__actions {
-    display: flex;
-    justify-content: space-between;
-    padding: 24px;
+    .sa__primary.secondary {
+      font-size: 12px;
+      padding: 12px 18px;
+    }
 
-    .sa__primary {
-      background-color: var(--primary-color);
-      color: white;
+    .sa__secondary.secondary {
       border: none;
     }
-    .sa__secondary {
-      border: -2px solid grey;
+
+    .button.secondary {
+      font-size: 12px;
+      padding: 12px 18px;
+      background-color: white;
+      color: black;
+    }
+
+    .button.secondary:hover {
+      background-color: rgb(219, 219, 219);
     }
   }
 }
