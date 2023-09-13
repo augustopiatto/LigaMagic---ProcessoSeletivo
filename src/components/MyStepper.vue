@@ -1,8 +1,11 @@
 <template>
   <div class="stepper">
     <div class="s__header">
-      <div v-for="item in items" :key="item" class="sh__step--whole">
-        <div class="shs__step--format" />
+      <div v-for="(item, idx) in items" :key="item" class="sh__step--whole">
+        <div
+          class="shs__step--format"
+          :class="{ active: idx === currentStep }"
+        />
         <span class="shs__step--title">{{ item }}</span>
       </div>
     </div>
@@ -101,6 +104,11 @@ export default {
         width: 50px;
         height: 50px;
         background-color: grey;
+        z-index: 1;
+      }
+      .shs__step--format.active {
+        background-color: rgb(194, 194, 194);
+        border: 2px solid grey;
       }
 
       .shs__step--title {
