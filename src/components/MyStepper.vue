@@ -81,21 +81,24 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  border: 1px solid;
-  padding: 24px;
+  border: 1px solid rgb(194, 194, 194);
+  box-shadow: 0 1px 4px 1px rgb(194, 194, 194);
+  border-radius: 4px;
   gap: 16px;
+  min-width: 320px;
 
   .s__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid;
+    border-bottom: 1px solid rgb(194, 194, 194);
+    box-shadow: 0 1px 4px 1px rgb(194, 194, 194);
 
     .sh__step--whole {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 8px;
+      padding: 16px 0;
       position: relative;
       width: 100%;
 
@@ -109,10 +112,11 @@ export default {
       .shs__step--format.active {
         background-color: rgb(194, 194, 194);
         border: 2px solid grey;
+        box-sizing: border-box;
       }
 
       .shs__step--title {
-        margin: 8px;
+        margin-top: 8px;
         text-align: center;
       }
     }
@@ -127,14 +131,14 @@ export default {
     }
   }
   .s__content {
-    padding: 16px;
+    padding: 8px 24px;
     min-height: 200px;
-    border: 1px solid;
   }
 
   .s__actions {
     display: flex;
     justify-content: space-between;
+    padding: 24px;
 
     .sa__primary {
       background-color: var(--primary-color);
