@@ -3,7 +3,6 @@
     <div class="s__header">
       <div v-for="item in items" :key="item" class="sh__step--whole">
         <div class="shs__step-format" />
-        <!-- <div v-if="isLastItem(item)" class="shs__step-divider" /> -->
         <!-- <slot name="item1">{{ item }}</slot> -->
       </div>
     </div>
@@ -85,12 +84,12 @@ export default {
 
   .s__header {
     display: flex;
-    flex: row;
+    align-items: center;
+    justify-content: space-between;
     border: 1px solid;
 
     .sh__step--whole {
       display: flex;
-      width: 100%;
 
       .shs__step-format {
         border-radius: 8px;
@@ -98,12 +97,14 @@ export default {
         height: 50px;
         background-color: grey;
       }
-      .shs__step-divider {
-        border-top: 20px solid white;
-        border-bottom: 20px solid white;
-        flex: 1;
-        background-color: grey;
-      }
+    }
+    .sh__step--whole:not(:last-child):after {
+      content: "";
+      background-color: grey;
+      margin-top: 15px;
+      height: 20px;
+      position: absolute;
+      width: calc(100% / 3);
     }
   }
   .s__content {
