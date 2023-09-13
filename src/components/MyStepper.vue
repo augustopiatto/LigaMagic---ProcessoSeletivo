@@ -2,8 +2,8 @@
   <div class="stepper">
     <div class="s__header">
       <div v-for="item in items" :key="item" class="sh__step--whole">
-        <div class="shs__step-format" />
-        <!-- <slot name="item1">{{ item }}</slot> -->
+        <div class="shs__step--format" />
+        <span class="shs__step--title">{{ item }}</span>
       </div>
     </div>
     <div class="s__content">
@@ -90,12 +90,22 @@ export default {
 
     .sh__step--whole {
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px;
+      position: relative;
+      width: 100%;
 
-      .shs__step-format {
+      .shs__step--format {
         border-radius: 8px;
         width: 50px;
         height: 50px;
         background-color: grey;
+      }
+
+      .shs__step--title {
+        margin: 8px;
+        text-align: center;
       }
     }
     .sh__step--whole:not(:last-child):after {
@@ -104,7 +114,8 @@ export default {
       margin-top: 15px;
       height: 20px;
       position: absolute;
-      width: calc(100% / 3);
+      width: 100%;
+      left: 50%;
     }
   }
   .s__content {
