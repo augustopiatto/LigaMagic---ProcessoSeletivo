@@ -1,23 +1,35 @@
 <template>
-  <MyStepper :items="steps">
+  <MyStepper :items="mainSteps">
     <template v-slot:content="{ step }">
-      <div v-if="step === 0">
+      <div v-show="step === 0">
         <MyCheckbox v-model="checkboxValue" value="Standard"
           >Standard</MyCheckbox
         >
         <MyCheckbox v-model="checkboxValue" value="Modern">Modern</MyCheckbox>
         <MyCheckbox v-model="checkboxValue" value="Pauper">Pauper</MyCheckbox>
       </div>
-      <div v-if="step === 1">
+      <div v-show="step === 1">
         <MyRadio v-model="radioValue" :items="radioItems"
           >Você sabe o que é Circuito LigaMagic?</MyRadio
         >
       </div>
-      <div v-if="step === 2">
+      <div v-show="step === 2">
         <MyTextField v-model="name">Nome</MyTextField>
       </div>
-      <div v-if="step === 3">
-        <MyDateField v-model="date">Escolha uma data</MyDateField>
+      <div v-show="step === 3">
+        <MyStepper :items="secondarySteps">
+          <template v-slot:content="{ step }">
+            <div v-show="step === 0">
+              <MyDateField v-model="standardDate">Escolha uma data</MyDateField>
+            </div>
+            <div v-show="step === 1">
+              <MyDateField v-model="modernDate">Escolha uma data</MyDateField>
+            </div>
+            <div v-show="step === 2">
+              <MyDateField v-model="pauperDate">Escolha uma data</MyDateField>
+            </div>
+          </template>
+        </MyStepper>
       </div>
     </template>
   </MyStepper>
@@ -41,14 +53,17 @@ export default {
   data() {
     return {
       checkboxValue: [],
-      date: "",
+      modernDate: "",
+      pauperDate: "",
       name: "",
       radioItems: [
         { label: "Sim", value: "yes" },
         { label: "Não", value: "no" },
       ],
       radioValue: "",
-      steps: ["Formato", "Questionário", "Pagamento", "Torneio"],
+      mainSteps: ["Formato", "Questionário", "Pagamento", "Torneio"],
+      secondarySteps: ["Standard", "Modern", "Pauper"],
+      standardDate: "",
     };
   },
 };
