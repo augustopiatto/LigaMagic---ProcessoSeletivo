@@ -1,22 +1,22 @@
 <template>
   <MyStepper :items="steps">
     <template v-slot:content="{ step }">
-      <div v-if="step === 1">
+      <div v-if="step === 0">
         <MyCheckbox v-model="checkboxValue" value="Standard"
           >Standard</MyCheckbox
         >
         <MyCheckbox v-model="checkboxValue" value="Modern">Modern</MyCheckbox>
         <MyCheckbox v-model="checkboxValue" value="Pauper">Pauper</MyCheckbox>
       </div>
-      <div v-if="step === 2">
+      <div v-if="step === 1">
         <MyRadio v-model="radioValue" :items="radioItems"
           >Você sabe o que é Circuito LigaMagic?</MyRadio
         >
       </div>
-      <div v-if="step === 3">
+      <div v-if="step === 2">
         <MyTextField v-model="name">Nome</MyTextField>
       </div>
-      <div v-if="step === 4">
+      <div v-if="step === 3">
         <MyDateField v-model="date">Escolha uma data</MyDateField>
       </div>
     </template>

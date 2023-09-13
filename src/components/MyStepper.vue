@@ -12,9 +12,18 @@
     </div>
     <div class="s__actions">
       <slot name="actions">
-        <MyButton class="sa__secondary" @click="previous">Voltar</MyButton>
-        <MyButton class="sa__primary" @click="next">Avançar</MyButton>
-        <MyButton class="sa__primary" @click="submit">Enviar</MyButton>
+        <MyButton
+          class="sa__secondary"
+          :disabled="this.currentStep === 0"
+          @click="previous"
+          >Voltar</MyButton
+        >
+        <MyButton v-if="!isLastStep" class="sa__primary" @click="next"
+          >Avançar</MyButton
+        >
+        <MyButton v-if="isLastStep" class="sa__primary" @click="submit"
+          >Enviar</MyButton
+        >
       </slot>
     </div>
   </div>
@@ -35,20 +44,25 @@ export default {
   },
   data() {
     return {
-      currentStep: 1,
+      currentStep: 0,
     };
+  },
+  computed: {
+    isLastStep() {
+      return this.currentStep === this.items.length - 1;
+    },
   },
   methods: {
     isLastItem(item) {
       return item !== this.items[this.items.length - 1];
     },
     next() {
-      if (this.currentStep <= this.items.length) {
+      if (this.currentStep <= this.items.length - 2) {
         this.currentStep += 1;
       }
     },
     previous() {
-      if (this.currentStep >= 1) {
+      if (this.currentStep > 0) {
         this.currentStep -= 1;
       }
     },
