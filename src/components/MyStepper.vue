@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import MyButton from "./MyButton.vue";
+import MyButton from "./MyButton/MyButton.vue";
 
 export default {
   props: {
