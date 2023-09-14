@@ -60,8 +60,8 @@ export default {
     };
   },
   watch: {
-    name() {
-      console.log(this.name);
+    radioValue() {
+      console.log(this.radioValue);
     },
   },
   methods: {
