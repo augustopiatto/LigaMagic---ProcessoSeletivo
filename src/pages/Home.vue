@@ -59,6 +59,11 @@ export default {
       steps: ["Formato", "Questionário", "Pagamento", "Torneio"],
     };
   },
+  watch: {
+    name() {
+      console.log(this.name);
+    },
+  },
   methods: {
     increase() {
       if (this.currentSep <= this.steps.length - 2) {

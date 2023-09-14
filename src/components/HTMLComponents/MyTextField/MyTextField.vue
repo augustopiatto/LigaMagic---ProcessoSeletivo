@@ -3,28 +3,18 @@
     <span class="mtf__title">
       <slot> Field </slot>
     </span>
-    <input v-model="model" class="mtf__input" />
+    <input
+      v-bind="$attrs"
+      class="mtf__input"
+      :value="$attrs.modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    modelValue: {
-      required: true,
-      type: String,
-    },
-  },
-  computed: {
-    model: {
-      get() {
-        return this.$props.modelValue;
-      },
-      set(value) {
-        this.$emit("update:modelValue", value);
-      },
-    },
-  },
+  inheritAttrs: false,
 };
 </script>
 
