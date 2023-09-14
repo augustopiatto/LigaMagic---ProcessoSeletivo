@@ -1,6 +1,7 @@
 <template>
   <div class="my-checkbox">
     <input
+      v-bind="$attrs"
       v-model="model"
       :id="value"
       type="checkbox"
@@ -15,11 +16,8 @@
 
 <script>
 export default {
+  inheritAttrs: false,
   props: {
-    modelValue: {
-      required: true,
-      type: Array,
-    },
     value: {
       required: false,
       type: String,
@@ -28,7 +26,7 @@ export default {
   computed: {
     model: {
       get() {
-        return this.$props.modelValue;
+        return this.$attrs.modelValue;
       },
       set(value) {
         this.$emit("update:modelValue", value);
