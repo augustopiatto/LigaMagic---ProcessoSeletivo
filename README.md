@@ -13,35 +13,33 @@ A seguir os componentes que foram criados:
 
 ### Telas
 
-#### Stepper
-
-##### Passo 1
+#### Passo 1
 
 ![image](https://github.com/augustopiatto/LigaMagic-ProcessoSeletivo/assets/77405968/1e51380d-1c12-4d52-a5d7-019e424af693)
 
-##### Passo 2
+#### Passo 2
 
 ![image](https://github.com/augustopiatto/LigaMagic-ProcessoSeletivo/assets/77405968/3aba9d46-f57d-405b-99cf-8ff97fcefed8)
 
-##### Passo 3
+#### Passo 3
 
 ![image](https://github.com/augustopiatto/LigaMagic-ProcessoSeletivo/assets/77405968/0aa4855a-f08d-41f5-9912-f302c565549e)
 
-##### Passo 4
+#### Passo 4
 
-###### Passo 4.1
+##### Passo 4.1
 
 ![image](https://github.com/augustopiatto/LigaMagic-ProcessoSeletivo/assets/77405968/8abc80ab-ddac-41ed-9035-35c6f641ed5e)
 
-###### Passo 4.2
+##### Passo 4.2
 
 ![image](https://github.com/augustopiatto/LigaMagic-ProcessoSeletivo/assets/77405968/6fd7931d-8c9a-4b75-b04a-490dd8941f2a)
 
-###### Passo 4.3
+##### Passo 4.3
 
 ![image](https://github.com/augustopiatto/LigaMagic-ProcessoSeletivo/assets/77405968/7a1a026a-7cc7-4877-b12a-0fd7d10292f6)
 
-###### Validações de input
+##### Validações de input
 
 ![image](https://github.com/augustopiatto/LigaMagic-ProcessoSeletivo/assets/77405968/99ad1a69-b53f-43bd-ba70-81cf4913cf53)
 
@@ -54,19 +52,19 @@ Para iniciar o projeto, siga os passos abaixo:
 - Execute `npm run dev` para iniciar o servidor de desenvolvimento
 - Acesse [localhost:5173](http://localhost:5173/)
 
-## Estrutura de pasta (TODO)
+## Estrutura de pasta
 
 ```
 ├── public                   # Assets públicos
 ├── src                      # Código fonte
-│   ├── api                  # API
-│   ├── apimock              # API (nesse caso mock da API)
 │   ├── assets               # Assets estáticos
 │   │   ├── style.scss       # Estilos gerais
-│   │   ├── images           # Pasta de imagens
 │   ├── components           # Componentes reutilizáveis
+│   │   ├── tests            # Testes unitários dos componentes usando Vitest
+│   ├── pages                # Componentes de página
+│       ├── Home.vue         # Página inicial
 │   ├── App.vue              # Componente raiz
-│   └── main.ts              # Entry point
+│   └── main.js              # Entry point
 ├── index.html               # Arquivo de acesso do JS
 ├── package.json             # Dependências e scripts
 ├── vite.config.ts           # Configuração do Vite
