@@ -25,6 +25,7 @@
       <div v-show="step === 3">
         <LastStep ref="lastStep" />
       </div>
+      <p v-if="error" class="error-message">{{ error }}</p>
     </template>
   </MyStepper>
 </template>
@@ -48,6 +49,7 @@ export default {
     return {
       checkboxValue: [],
       currentSep: 0,
+      error: "",
       name: "",
       radioItems: [
         { label: "Sim", value: "yes" },
@@ -62,6 +64,7 @@ export default {
       if (this.currentSep <= this.steps.length - 2) {
         this.currentSep += 1;
       }
+      this.error = "";
     },
     next() {
       if (this.currentSep === 0) {
@@ -69,18 +72,20 @@ export default {
           this.increase();
           return;
         }
+        this.error = "Selecione pelo menos um dos valores";
       } else if (this.currentSep === 1) {
         if (!!this.radioValue) {
           this.increase();
           return;
         }
+        this.error = "Selecione uma resposta";
       } else if (this.currentSep === 2) {
         if (!!this.name) {
           this.increase();
           return;
         }
+        this.error = "Digite seu nome";
       }
-      console.log("vazio!");
     },
 
     previous() {
@@ -95,11 +100,12 @@ export default {
       this.modernDate = "";
       this.pauperDate = "";
       this.standardDate = "";
+      this.error = "";
       this.$refs.lastStep.reset();
     },
     submit() {
       if (!this.$refs.lastStep.validate()) {
-        console.log("vazio!");
+        this.$refs.lastStep.error = "Está faltando o campo de data";
         return;
       }
       const obj = {
@@ -112,7 +118,7 @@ export default {
           standardDate: this.standardDate,
         },
       };
-      console.log(obj);
+      console.log("Body a ser enviado para API", obj);
       this.reset();
       this.$refs.lastStep.reset();
       this.currentSep = 0;

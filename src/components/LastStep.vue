@@ -16,6 +16,7 @@
       <div v-show="step === 2">
         <MyDateField v-model="pauperDate">Escolha uma data</MyDateField>
       </div>
+      <p v-if="error" class="error-message">{{ error }}</p>
     </template>
   </MyStepper>
 </template>
@@ -32,6 +33,7 @@ export default {
   data() {
     return {
       currentStep: 0,
+      error: "",
       modernDate: "",
       pauperDate: "",
       steps: ["Standard", "Modern", "Pauper"],
@@ -43,6 +45,7 @@ export default {
       if (this.currentStep <= this.steps.length - 2) {
         this.currentStep += 1;
       }
+      this.error = "";
     },
     next() {
       if (this.currentStep === 0) {
@@ -56,7 +59,7 @@ export default {
           return;
         }
       }
-      console.log("vazio!");
+      this.error = "Preencha a data";
     },
     previous() {
       if (this.currentStep > 0) {
@@ -68,6 +71,7 @@ export default {
       this.modernDate = "";
       this.pauperDate = "";
       this.standardDate = "";
+      this.error = "";
     },
     validate() {
       if (!this.pauperDate) {

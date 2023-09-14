@@ -1,10 +1,16 @@
 :root {
   font-family: Gotham, Sans-serif;
   --primary-color: rgb(24, 103, 192);
+  --error: rgb(255, 0, 0);
 }
 
 body {
   max-width: 840px;
   margin: 0 auto;
   margin-top: 24px;
+}
+
+.error-message {
+  color: var(--error);
+  font-weight: 600;
 }
