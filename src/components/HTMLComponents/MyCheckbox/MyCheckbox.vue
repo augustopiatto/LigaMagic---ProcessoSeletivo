@@ -3,9 +3,9 @@
     <input
       v-bind="$attrs"
       v-model="model"
-      :id="value"
-      type="checkbox"
       class="mc__input"
+      type="checkbox"
+      :id="value"
       :value="value"
     />
     <label class="mc__label" :for="value">
