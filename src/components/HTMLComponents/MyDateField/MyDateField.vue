@@ -3,28 +3,19 @@
     <span class="mdf__title">
       <slot> Date </slot>
     </span>
-    <input v-model="model" type="date" class="mdf__input" />
+    <input
+      v-bind="$attrs"
+      :value="$attrs.modelValue"
+      type="date"
+      class="mdf__input"
+      @change="$emit('update:modelValue', $event.target.value)"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    modelValue: {
-      required: true,
-      type: String,
-    },
-  },
-  computed: {
-    model: {
-      get() {
-        return this.$props.modelValue;
-      },
-      set(value) {
-        this.$emit("update:modelValue", value);
-      },
-    },
-  },
+  inheritAttrs: false,
 };
 </script>
 

@@ -59,11 +59,6 @@ export default {
       steps: ["Formato", "Questionário", "Pagamento", "Torneio"],
     };
   },
-  watch: {
-    radioValue() {
-      console.log(this.radioValue);
-    },
-  },
   methods: {
     increase() {
       if (this.currentSep <= this.steps.length - 2) {
