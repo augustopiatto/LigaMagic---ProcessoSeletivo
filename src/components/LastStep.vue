@@ -40,11 +40,6 @@ export default {
       standardDate: "",
     };
   },
-  watch: {
-    standardDate() {
-      console.log(this.standardDate);
-    },
-  },
   methods: {
     increaseSecondary() {
       if (this.currentStep <= this.steps.length - 2) {

@@ -108,6 +108,7 @@ export default {
         this.$refs.lastStep.error = "Está faltando o campo de data";
         return;
       }
+      //: Para ser enviado ao back
       const obj = {
         checkboxValue: this.checkboxValue,
         radioValue: this.radioValue,
@@ -118,7 +119,7 @@ export default {
           standardDate: this.standardDate,
         },
       };
-      console.log("Body a ser enviado para API", obj);
+      console.log(window.alert("Formulário enviado!"));
       this.reset();
       this.$refs.lastStep.reset();
       this.currentSep = 0;
