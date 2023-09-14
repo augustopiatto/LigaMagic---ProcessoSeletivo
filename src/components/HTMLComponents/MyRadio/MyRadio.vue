@@ -6,11 +6,11 @@
     <div v-for="item in items" :key="item.value" class="mr__all-inputs">
       <input
         v-bind="$attrs"
-        type="radio"
         class="mrai__single-input"
-        :value="item.value"
-        :id="item.value"
+        type="radio"
         :checked="item.value === $attrs.modelValue"
+        :id="item.value"
+        :value="item.value"
         @change="$emit('update:modelValue', item.value)"
       />
       <label :for="item.value" class="mrai__label">{{ item.label }}</label>
@@ -24,7 +24,7 @@ export default {
   props: {
     items: {
       required: true,
-      type: Object,
+      type: Array,
     },
   },
 };
