@@ -79,7 +79,7 @@ function reset() {
 }
 
 function validate() {
-  if (!pauperDate) {
+  if (!pauperDate.value) {
     return false;
   }
   return true;

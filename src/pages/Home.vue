@@ -95,7 +95,7 @@ function reset() {
 
 function submit() {
   if (!lastStep.value.validate()) {
-    lastStep.value.error.value = "Está faltando o campo de data";
+    lastStep.value.error = "Está faltando o campo de data";
     return;
   }
   //: Para ser enviado ao back
@@ -109,7 +109,6 @@ function submit() {
       standardDate: lastStep.value.standardDate,
     },
   };
-  console.log(obj);
   console.log(window.alert("Formulário enviado!"));
   reset();
   currentStep.value = 0;
