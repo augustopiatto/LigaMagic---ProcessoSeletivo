@@ -3,21 +3,27 @@
     <span class="mdf__title">
       <slot> Date </slot>
     </span>
-    <input
-      v-model="date"
-      type="date"
-      class="mdf__input"
-      @change="$emit('update:modelValue', date)"
-    />
+    <input v-model="model" type="date" class="mdf__input" />
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      date: "",
-    };
+  props: {
+    modelValue: {
+      required: true,
+      type: String,
+    },
+  },
+  computed: {
+    model: {
+      get() {
+        return this.$props.modelValue;
+      },
+      set(value) {
+        this.$emit("update:modelValue", value);
+      },
+    },
   },
 };
 </script>

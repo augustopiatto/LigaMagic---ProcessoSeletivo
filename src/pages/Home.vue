@@ -31,7 +31,6 @@
 
 <script>
 import MyCheckbox from "../components/HTMLComponents/MyCheckbox/MyCheckbox.vue";
-import MyDateField from "../components/HTMLComponents/MyDateField/MyDateField.vue";
 import MyRadio from "../components/HTMLComponents/MyRadio/MyRadio.vue";
 import MyStepper from "../components/HTMLComponents/MyStepper/MyStepper.vue";
 import MyTextField from "../components/HTMLComponents/MyTextField/MyTextField.vue";
@@ -40,7 +39,6 @@ import LastStep from "../components/LastStep.vue";
 export default {
   components: {
     MyCheckbox,
-    MyDateField,
     MyStepper,
     MyRadio,
     MyTextField,

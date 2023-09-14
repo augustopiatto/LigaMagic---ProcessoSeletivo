@@ -3,20 +3,27 @@
     <span class="mtf__title">
       <slot> Field </slot>
     </span>
-    <input
-      v-model="text"
-      class="mtf__input"
-      @input="$emit('update:modelValue', text)"
-    />
+    <input v-model="model" class="mtf__input" />
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      text: "",
-    };
+  props: {
+    modelValue: {
+      required: true,
+      type: String,
+    },
+  },
+  computed: {
+    model: {
+      get() {
+        return this.$props.modelValue;
+      },
+      set(value) {
+        this.$emit("update:modelValue", value);
+      },
+    },
   },
 };
 </script>
