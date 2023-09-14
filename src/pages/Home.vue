@@ -1,6 +1,6 @@
 <template>
   <MyStepper
-    :currentStep="currentSep"
+    :currentStep="currentStep"
     :items="steps"
     @next="next"
     @previous="previous"
@@ -30,100 +30,88 @@
   </MyStepper>
 </template>
 
-<script>
+<script setup>
 import MyCheckbox from "../components/HTMLComponents/MyCheckbox/MyCheckbox.vue";
 import MyRadio from "../components/HTMLComponents/MyRadio/MyRadio.vue";
 import MyStepper from "../components/HTMLComponents/MyStepper/MyStepper.vue";
 import MyTextField from "../components/HTMLComponents/MyTextField/MyTextField.vue";
 import LastStep from "../components/LastStep.vue";
+import { readonly, ref } from "vue";
 
-export default {
-  components: {
-    MyCheckbox,
-    MyStepper,
-    MyRadio,
-    MyTextField,
-    LastStep,
-  },
-  data() {
-    return {
-      checkboxValue: [],
-      currentSep: 0,
-      error: "",
-      name: "",
-      radioItems: [
-        { label: "Sim", value: "yes" },
-        { label: "Não", value: "no" },
-      ],
-      radioValue: "",
-      steps: ["Formato", "Questionário", "Pagamento", "Torneio"],
-    };
-  },
-  methods: {
-    increase() {
-      if (this.currentSep <= this.steps.length - 2) {
-        this.currentSep += 1;
-      }
-      this.error = "";
-    },
-    next() {
-      if (this.currentSep === 0) {
-        if (this.checkboxValue.length > 0) {
-          this.increase();
-          return;
-        }
-        this.error = "Selecione pelo menos um dos valores";
-      } else if (this.currentSep === 1) {
-        if (!!this.radioValue) {
-          this.increase();
-          return;
-        }
-        this.error = "Selecione uma resposta";
-      } else if (this.currentSep === 2) {
-        if (!!this.name) {
-          this.increase();
-          return;
-        }
-        this.error = "Digite seu nome";
-      }
-    },
+const lastStep = ref(null);
+const checkboxValue = ref([]);
+const currentStep = ref(0);
+const error = ref("");
+const name = ref("");
+const radioItems = ref([
+  { label: "Sim", value: "yes" },
+  { label: "Não", value: "no" },
+]);
+const radioValue = ref("");
+const steps = ref(["Formato", "Questionário", "Pagamento", "Torneio"]);
 
-    previous() {
-      if (this.currentSep > 0) {
-        this.currentSep -= 1;
-      }
+function increase() {
+  if (currentStep.value <= steps.value.length - 2) {
+    currentStep.value += 1;
+  }
+  error.value = "";
+}
+
+function next() {
+  if (currentStep.value === 0) {
+    if (checkboxValue.value.length > 0) {
+      increase();
+      return;
+    }
+    error.value = "Selecione pelo menos um dos valores";
+  } else if (currentStep.value === 1) {
+    if (!!radioValue.value) {
+      increase();
+      return;
+    }
+    error.value = "Selecione uma resposta";
+  } else if (currentStep.value === 2) {
+    if (!!name.value) {
+      increase();
+      return;
+    }
+    error.value = "Digite seu nome";
+  }
+}
+
+function previous() {
+  if (currentStep.value > 0) {
+    currentStep.value -= 1;
+  }
+}
+
+function reset() {
+  checkboxValue.value = [];
+  radioValue.value = "";
+  name.value = "";
+  error.value = "";
+  lastStep.value.reset();
+}
+
+function submit() {
+  if (!lastStep.value.validate()) {
+    lastStep.value.error.value = "Está faltando o campo de data";
+    return;
+  }
+  //: Para ser enviado ao back
+  const obj = {
+    checkboxValue: checkboxValue.value,
+    radioValue: radioValue.value,
+    name: name.value,
+    tournamentDates: {
+      modernDate: lastStep.value.modernDate,
+      pauperDate: lastStep.value.pauperDate,
+      standardDate: lastStep.value.standardDate,
     },
-    reset() {
-      this.checkboxValue = [];
-      this.radioValue = "";
-      this.name = "";
-      this.modernDate = "";
-      this.pauperDate = "";
-      this.standardDate = "";
-      this.error = "";
-      this.$refs.lastStep.reset();
-    },
-    submit() {
-      if (!this.$refs.lastStep.validate()) {
-        this.$refs.lastStep.error = "Está faltando o campo de data";
-        return;
-      }
-      //: Para ser enviado ao back
-      const obj = {
-        checkboxValue: this.checkboxValue,
-        radioValue: this.radioValue,
-        name: this.name,
-        tournamentDates: {
-          modernDate: this.modernDate,
-          pauperDate: this.pauperDate,
-          standardDate: this.standardDate,
-        },
-      };
-      console.log(window.alert("Formulário enviado!"));
-      this.reset();
-      this.$refs.lastStep.reset();
-      this.currentSep = 0;
-    },
-  },
-};
+  };
+  console.log(obj);
+  console.log(window.alert("Formulário enviado!"));
+  reset();
+  currentStep.value = 0;
+}
 </script>

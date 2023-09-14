@@ -33,6 +33,15 @@ const pauperDate = ref("");
 const steps = ref(["Standard", "Modern", "Pauper"]);
 const standardDate = ref("");
 
+defineExpose({
+  reset,
+  validate,
+  error,
+  modernDate,
+  pauperDate,
+  standardDate,
+});
+
 function increase() {
   if (currentStep.value <= steps.value.length - 2) {
     currentStep.value += 1;
