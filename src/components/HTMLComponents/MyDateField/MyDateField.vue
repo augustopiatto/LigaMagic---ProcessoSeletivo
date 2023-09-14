@@ -5,9 +5,9 @@
     </span>
     <input
       v-bind="$attrs"
-      :value="$attrs.modelValue"
-      type="date"
       class="mdf__input"
+      type="date"
+      :value="$attrs.modelValue"
       @change="$emit('update:modelValue', $event.target.value)"
     />
   </div>
