@@ -40,7 +40,7 @@
         <MyButton
           v-if="isLastStep"
           class="sa__primary"
-          :class="{ secondary: secondary }"
+          :class="{ disabled: secondary, secondary: secondary }"
           @click="submit"
           >Enviar</MyButton
         >
@@ -62,14 +62,13 @@ export default {
       required: false,
       type: Boolean,
     },
+    currentStep: {
+      required: false,
+      type: Number,
+    },
   },
   components: {
     MyButton,
-  },
-  data() {
-    return {
-      currentStep: 0,
-    };
   },
   computed: {
     isLastStep() {
@@ -78,18 +77,13 @@ export default {
   },
   methods: {
     next() {
-      if (this.currentStep <= this.items.length - 2) {
-        this.currentStep += 1;
-      }
+      this.$emit("next");
     },
     previous() {
-      if (this.currentStep > 0) {
-        this.currentStep -= 1;
-      }
+      this.$emit("previous");
     },
     submit() {
-      console.log("oi");
-      return;
+      this.$emit("submit");
     },
   },
 };
@@ -223,6 +217,10 @@ export default {
       font-size: 12px;
       padding: 12px 18px;
       color: black;
+    }
+
+    .sa__primary.secondary.disabled {
+      display: none;
     }
 
     .sa__secondary.secondary {

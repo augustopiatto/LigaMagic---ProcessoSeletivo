@@ -1,9 +1,15 @@
 <template>
   <div class="my-checkbox">
-    <input v-model="model" type="checkbox" class="mc__input" :value="value" />
-    <span class="mc__label">
+    <input
+      v-model="model"
+      :id="value"
+      type="checkbox"
+      class="mc__input"
+      :value="value"
+    />
+    <label class="mc__label" :for="value">
       <slot> Check me </slot>
-    </span>
+    </label>
   </div>
 </template>
 
