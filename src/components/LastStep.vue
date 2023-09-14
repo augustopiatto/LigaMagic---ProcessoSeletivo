@@ -21,64 +21,58 @@
   </MyStepper>
 </template>
 
-<script>
+<script setup>
 import MyDateField from "../components/HTMLComponents/MyDateField/MyDateField.vue";
 import MyStepper from "../components/HTMLComponents/MyStepper/MyStepper.vue";
+import { ref } from "vue";
 
-export default {
-  components: {
-    MyDateField,
-    MyStepper,
-  },
-  data() {
-    return {
-      currentStep: 0,
-      error: "",
-      modernDate: "",
-      pauperDate: "",
-      steps: ["Standard", "Modern", "Pauper"],
-      standardDate: "",
-    };
-  },
-  methods: {
-    increaseSecondary() {
-      if (this.currentStep <= this.steps.length - 2) {
-        this.currentStep += 1;
-      }
-      this.error = "";
-    },
-    next() {
-      if (this.currentStep === 0) {
-        if (!!this.standardDate) {
-          this.increaseSecondary();
-          return;
-        }
-      } else if (this.currentStep === 1) {
-        if (!!this.modernDate) {
-          this.increaseSecondary();
-          return;
-        }
-      }
-      this.error = "Preencha a data";
-    },
-    previous() {
-      if (this.currentStep > 0) {
-        this.currentStep -= 1;
-      }
-    },
-    reset() {
-      this.currentStep = 0;
-      this.modernDate = "";
-      this.pauperDate = "";
-      this.standardDate = "";
-      this.error = "";
-    },
-    validate() {
-      if (!this.pauperDate) {
-        return false;
-      }
-      return true;
-    },
-  },
-};
+const currentStep = ref(0);
+const error = ref("");
+const modernDate = ref("");
+const pauperDate = ref("");
+const steps = ref(["Standard", "Modern", "Pauper"]);
+const standardDate = ref("");
+
+function increase() {
+  if (currentStep.value <= steps.value.length - 2) {
+    currentStep.value += 1;
+  }
+  error.value = "";
+}
+
+function next() {
+  if (currentStep.value === 0) {
+    if (!!standardDate.value) {
+      increase();
+      return;
+    }
+  } else if (currentStep.value === 1) {
+    if (!!modernDate.value) {
+      increase();
+      return;
+    }
+  }
+  error.value = "Preencha a data";
+}
+
+function previous() {
+  if (currentStep.value > 0) {
+    currentStep.value -= 1;
+  }
+}
+
+function reset() {
+  currentStep.value = 0;
+  modernDate.value = "";
+  pauperDate.value = "";
+  standardDate.value = "";
+  error.value = "";
+}
+
+function validate() {
+  if (!pauperDate) {
+    return false;
+  }
+  return true;
+}
 </script>

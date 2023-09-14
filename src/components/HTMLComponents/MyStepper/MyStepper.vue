@@ -49,44 +49,40 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import MyButton from "../MyButton/MyButton.vue";
+import { computed } from "vue";
 
-export default {
-  props: {
-    items: {
-      default: ["Step 1", "Step 2", "Step 3"],
-      type: Array,
-    },
-    secondary: {
-      required: false,
-      type: Boolean,
-    },
-    currentStep: {
-      required: false,
-      type: Number,
-    },
+const emit = defineEmits(["next", "previous", "submit"]);
+
+const props = defineProps({
+  items: {
+    default: ["Step 1", "Step 2", "Step 3"],
+    type: Array,
   },
-  components: {
-    MyButton,
+  secondary: {
+    required: false,
+    type: Boolean,
   },
-  computed: {
-    isLastStep() {
-      return this.currentStep === this.items.length - 1;
-    },
+  currentStep: {
+    required: false,
+    type: Number,
   },
-  methods: {
-    next() {
-      this.$emit("next");
-    },
-    previous() {
-      this.$emit("previous");
-    },
-    submit() {
-      this.$emit("submit");
-    },
-  },
-};
+});
+
+const isLastStep = computed(() => props.currentStep === props.items.length - 1);
+
+function next() {
+  emit("next");
+}
+
+function previous() {
+  emit("previous");
+}
+
+function submit() {
+  emit("submit");
+}
 </script>
 
 <style lang="scss" scoped>
