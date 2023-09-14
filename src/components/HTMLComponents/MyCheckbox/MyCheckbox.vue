@@ -14,26 +14,27 @@
   </div>
 </template>
 
-<script>
-export default {
+<script setup>
+import { computed, useAttrs } from "vue";
+
+const attrs = useAttrs();
+const emit = defineEmits(["update:modelValue"]);
+
+defineOptions({
   inheritAttrs: false,
-  props: {
-    value: {
-      required: false,
-      type: String,
-    },
+});
+
+defineProps({
+  value: {
+    required: false,
+    type: String,
   },
-  computed: {
-    model: {
-      get() {
-        return this.$attrs.modelValue;
-      },
-      set(value) {
-        this.$emit("update:modelValue", value);
-      },
-    },
-  },
-};
+});
+
+const model = computed({
+  get: () => attrs.modelValue,
+  set: (value) => emit("update:modelValue", value),
+});
 </script>
 
 <style lang="scss" scoped>

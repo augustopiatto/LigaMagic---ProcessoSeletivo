@@ -18,16 +18,17 @@
   </div>
 </template>
 
-<script>
-export default {
+<script setup>
+defineOptions({
   inheritAttrs: false,
-  props: {
-    items: {
-      required: true,
-      type: Array,
-    },
+});
+
+defineProps({
+  items: {
+    required: true,
+    type: Array,
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

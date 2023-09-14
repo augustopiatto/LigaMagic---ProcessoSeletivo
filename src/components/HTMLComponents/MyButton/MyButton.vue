@@ -4,15 +4,13 @@
   </button>
 </template>
 
-<script>
-export default {
-  props: {
-    disabled: {
-      default: false,
-      type: Boolean,
-    },
+<script setup>
+defineProps({
+  disabled: {
+    default: false,
+    type: Boolean,
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

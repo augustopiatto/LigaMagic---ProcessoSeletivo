@@ -12,10 +12,10 @@
   </div>
 </template>
 
-<script>
-export default {
+<script setup>
+defineOptions({
   inheritAttrs: false,
-};
+});
 </script>
 
 <style lang="scss" scoped>
