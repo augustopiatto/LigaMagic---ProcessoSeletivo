@@ -24,6 +24,7 @@
 <script setup>
 import MyDateField from "../components/HTMLComponents/MyDateField/MyDateField.vue";
 import MyStepper from "../components/HTMLComponents/MyStepper/MyStepper.vue";
+import { secondaryStepperNextStep } from "../helpers/validations.js";
 import { ref } from "vue";
 
 const currentStep = ref(0);
@@ -50,18 +51,13 @@ function increase() {
 }
 
 function next() {
-  if (currentStep.value === 0) {
-    if (!!standardDate.value) {
-      increase();
-      return;
-    }
-  } else if (currentStep.value === 1) {
-    if (!!modernDate.value) {
-      increase();
-      return;
-    }
-  }
-  error.value = "Preencha a data";
+  const { errorMessage, shouldIncrease } = secondaryStepperNextStep(
+    currentStep.value,
+    standardDate.value,
+    modernDate.value
+  );
+  if (shouldIncrease) return increase();
+  error.value = errorMessage;
 }
 
 function previous() {
@@ -79,9 +75,6 @@ function reset() {
 }
 
 function validate() {
-  if (!pauperDate.value) {
-    return false;
-  }
-  return true;
+  return !!pauperDate.value;
 }
 </script>

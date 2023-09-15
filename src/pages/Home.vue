@@ -36,12 +36,13 @@ import MyRadio from "../components/HTMLComponents/MyRadio/MyRadio.vue";
 import MyStepper from "../components/HTMLComponents/MyStepper/MyStepper.vue";
 import MyTextField from "../components/HTMLComponents/MyTextField/MyTextField.vue";
 import LastStep from "../components/LastStep.vue";
-import { readonly, ref } from "vue";
+import { mainStepperNextStep } from "../helpers/validations.js";
+import { ref } from "vue";
 
-const lastStep = ref(null);
 const checkboxValue = ref([]);
 const currentStep = ref(0);
 const error = ref("");
+const lastStep = ref(null);
 const name = ref("");
 const radioItems = ref([
   { label: "Sim", value: "yes" },
@@ -58,25 +59,14 @@ function increase() {
 }
 
 function next() {
-  if (currentStep.value === 0) {
-    if (checkboxValue.value.length > 0) {
-      increase();
-      return;
-    }
-    error.value = "Selecione pelo menos um dos valores";
-  } else if (currentStep.value === 1) {
-    if (!!radioValue.value) {
-      increase();
-      return;
-    }
-    error.value = "Selecione uma resposta";
-  } else if (currentStep.value === 2) {
-    if (!!name.value) {
-      increase();
-      return;
-    }
-    error.value = "Digite seu nome";
-  }
+  const { errorMessage, shouldIncrease } = mainStepperNextStep(
+    currentStep.value,
+    checkboxValue.value,
+    radioValue.value,
+    name.value
+  );
+  if (shouldIncrease) return increase();
+  error.value = errorMessage;
 }
 
 function previous() {
