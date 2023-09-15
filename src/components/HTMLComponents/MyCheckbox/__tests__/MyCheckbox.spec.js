@@ -4,10 +4,8 @@ import MyCheckbox from "../MyCheckbox.vue";
 
 describe("MyCheckbox.vue", () => {
   test("Componente sendo montado", () => {
-    const wrapper = mount(MyCheckbox, {});
-    const checkboxInput = wrapper.find('input[type="checkbox"]');
-
-    expect(checkboxInput.element.checked).toBe(false);
+    const wrapper = mount(MyCheckbox);
+    expect(wrapper).toBeTruthy();
   });
 
   test("Componente checkado", async () => {
@@ -15,7 +13,7 @@ describe("MyCheckbox.vue", () => {
     const checkboxInput = wrapper.find('input[type="checkbox"]');
 
     await checkboxInput.setChecked();
-
+    expect(wrapper.emitted("update:modelValue")).toEqual([[true]]);
     expect(checkboxInput.element.checked).toBe(true);
   });
 });

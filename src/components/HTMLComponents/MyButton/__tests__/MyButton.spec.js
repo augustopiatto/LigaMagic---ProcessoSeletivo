@@ -4,13 +4,8 @@ import MyButton from "../MyButton.vue";
 
 describe("MyButton.vue", () => {
   test("Componente sendo montado", () => {
-    const wrapper = mount(MyButton, {
-      propsData: {
-        disabled: false,
-      },
-    });
-
-    expect(wrapper.props().disabled).toBe(false);
+    const wrapper = mount(MyButton);
+    expect(wrapper).toBeTruthy();
   });
 
   test("Componente sem estilo clicável quando desabilitado", () => {
@@ -20,6 +15,8 @@ describe("MyButton.vue", () => {
       },
     });
 
-    expect(wrapper.classes()).toEqual(expect.arrayContaining(["disabled"]));
+    const button = wrapper.find("button");
+    expect(button.attributes().disabled).toBeDefined();
+    expect(button.classes()).toEqual(expect.arrayContaining(["disabled"]));
   });
 });

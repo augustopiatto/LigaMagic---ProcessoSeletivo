@@ -3,18 +3,25 @@
     <span class="mr__title">
       <slot> Pick one </slot>
     </span>
-    <div v-for="item in items" :key="item.value" class="mr__all-inputs">
+    <label
+      v-for="item in items"
+      :key="item.value"
+      :for="item.value"
+      class="mr__label"
+    >
       <input
         v-bind="$attrs"
-        class="mrai__single-input"
+        class="mrl__single-input"
+        name="radio"
         type="radio"
         :checked="item.value === $attrs.modelValue"
         :id="item.value"
         :value="item.value"
         @change="$emit('update:modelValue', item.value)"
       />
-      <label :for="item.value" class="mrai__label">{{ item.label }}</label>
-    </div>
+
+      {{ item.label }}</label
+    >
   </div>
 </template>
 
@@ -42,19 +49,17 @@ defineProps({
     font-weight: 600;
   }
 
-  .mr__all-inputs {
+  .mr__label {
+    font-size: 18px;
+    line-height: 20px;
+    margin-left: 4px;
     display: flex;
     align-items: center;
+    gap: 8px;
 
-    .mrai__single-input {
+    .mrl__single-input {
       height: 25px;
       width: 25px;
-    }
-
-    .mrai__label {
-      font-size: 18px;
-      line-height: 20px;
-      margin-left: 4px;
     }
   }
 }

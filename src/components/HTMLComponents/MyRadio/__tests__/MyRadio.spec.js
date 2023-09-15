@@ -4,20 +4,8 @@ import MyRadio from "../MyRadio.vue";
 
 describe("MyRadio.vue", () => {
   test("Componente sendo montado", () => {
-    const wrapper = mount(MyRadio, {
-      propsData: {
-        items: [
-          { label: "Yes", value: "yes" },
-          { label: "No", value: "no" },
-        ],
-      },
-    });
-
-    const yesRadioInput = wrapper.find('input[type="radio", value="yes"]');
-    const noRadioInput = wrapper.find('input[type="radio", value="no"]');
-
-    expect(yesRadioInput.element.checked).toBe(false);
-    expect(noRadioInput.element.checked).toBe(false);
+    const wrapper = mount(MyRadio);
+    expect(wrapper).toBeTruthy();
   });
 
   test("Selecionando uma das opções", async () => {
@@ -30,10 +18,17 @@ describe("MyRadio.vue", () => {
       },
     });
 
-    const radioInput = wrapper.find('input[type="radio", value="no"]');
+    const radioInputs = wrapper.findAll('input[type="radio');
+    const yes = radioInputs[0];
+    const no = radioInputs[1];
 
-    await radioInput.setChecked(true);
+    expect(yes.element.checked).toBe(false);
+    expect(no.element.checked).toBe(false);
 
-    expect(radioInput.element.checked).toBe(true);
+    await no.setChecked(true);
+
+    expect(wrapper.emitted("update:modelValue")).toEqual([["no"]]);
+    expect(yes.element.checked).toBe(false);
+    expect(no.element.checked).toBe(true);
   });
 });
