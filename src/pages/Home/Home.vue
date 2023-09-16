@@ -14,17 +14,11 @@
         <MyCheckbox v-model="checkboxValue" value="Modern">Modern</MyCheckbox>
         <MyCheckbox v-model="checkboxValue" value="Pauper">Pauper</MyCheckbox>
       </div>
-      <div v-show="step === 1">
-        <MyRadio v-model="radioValue" :items="radioItems"
-          >Você sabe o que é Circuito LigaMagic?</MyRadio
-        >
-      </div>
-      <div v-show="step === 2">
-        <MyTextField v-model="name">Nome</MyTextField>
-      </div>
-      <div v-show="step === 3">
-        <LastStep ref="lastStep" />
-      </div>
+      <MyRadio v-show="step === 1" v-model="radioValue" :items="radioItems"
+        >Você sabe o que é Circuito LigaMagic?</MyRadio
+      >
+      <MyTextField v-show="step === 2" v-model="name">Nome</MyTextField>
+      <LastStep ref="lastStep" v-show="step === 3" />
       <p v-if="error" class="error-message">{{ error }}</p>
     </template>
   </MyStepper>
