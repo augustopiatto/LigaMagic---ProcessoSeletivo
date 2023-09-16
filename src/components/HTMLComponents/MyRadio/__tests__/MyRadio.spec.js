@@ -19,8 +19,8 @@ describe("MyRadio.vue", () => {
     });
 
     const radioInputs = wrapper.findAll('input[type="radio');
-    const yes = radioInputs[0];
-    const no = radioInputs[1];
+    const yes = radioInputs.at(0);
+    const no = radioInputs.at(1);
 
     expect(yes.element.checked).toBe(false);
     expect(no.element.checked).toBe(false);

@@ -7,24 +7,24 @@
     secondary
   >
     <template v-slot:content="{ step }">
-      <div v-show="step === 0">
-        <MyDateField v-model="standardDate">Escolha uma data</MyDateField>
-      </div>
-      <div v-show="step === 1">
-        <MyDateField v-model="modernDate">Escolha uma data</MyDateField>
-      </div>
-      <div v-show="step === 2">
-        <MyDateField v-model="pauperDate">Escolha uma data</MyDateField>
-      </div>
+      <MyDateField v-show="step === 0" v-model="standardDate"
+        >Escolha uma data</MyDateField
+      >
+      <MyDateField v-show="step === 1" v-model="modernDate"
+        >Escolha uma data</MyDateField
+      >
+      <MyDateField v-show="step === 2" v-model="pauperDate"
+        >Escolha uma data</MyDateField
+      >
       <p v-if="error" class="error-message">{{ error }}</p>
     </template>
   </MyStepper>
 </template>
 
 <script setup>
-import MyDateField from "../components/HTMLComponents/MyDateField/MyDateField.vue";
-import MyStepper from "../components/HTMLComponents/MyStepper/MyStepper.vue";
-import { secondaryStepperNextStep } from "../helpers/validations.js";
+import MyDateField from "../HTMLComponents/MyDateField/MyDateField.vue";
+import MyStepper from "../HTMLComponents/MyStepper/MyStepper.vue";
+import { secondaryStepperNextStep } from "../../helpers/validations.js";
 import { ref } from "vue";
 
 const currentStep = ref(0);
@@ -35,6 +35,8 @@ const steps = ref(["Standard", "Modern", "Pauper"]);
 const standardDate = ref("");
 
 defineExpose({
+  //: next só está aqui por causa do teste que não tinha visibilidade deste método
+  next,
   reset,
   validate,
   error,

@@ -28,7 +28,6 @@ describe("MyStepper.vue", () => {
     const next = submitButtons[1];
     await wrapper.vm.$emit("next");
     //: O debaixo não funciona pq o MyButton não é nativo do DOM
-    // await next.trigger("click");
     expect(next.text()).toBe("Avançar");
     expect(wrapper.emitted("next")).toBeTruthy();
   });

@@ -31,12 +31,12 @@
 </template>
 
 <script setup>
-import MyCheckbox from "../components/HTMLComponents/MyCheckbox/MyCheckbox.vue";
-import MyRadio from "../components/HTMLComponents/MyRadio/MyRadio.vue";
-import MyStepper from "../components/HTMLComponents/MyStepper/MyStepper.vue";
-import MyTextField from "../components/HTMLComponents/MyTextField/MyTextField.vue";
-import LastStep from "../components/LastStep.vue";
-import { mainStepperNextStep } from "../helpers/validations.js";
+import MyCheckbox from "../../components/HTMLComponents/MyCheckbox/MyCheckbox.vue";
+import MyRadio from "../../components/HTMLComponents/MyRadio/MyRadio.vue";
+import MyStepper from "../../components/HTMLComponents/MyStepper/MyStepper.vue";
+import MyTextField from "../../components/HTMLComponents/MyTextField/MyTextField.vue";
+import LastStep from "../../components/LastStep/LastStep.vue";
+import { mainStepperNextStep } from "../../helpers/validations.js";
 import { ref } from "vue";
 
 const checkboxValue = ref([]);
