@@ -1,4 +1,4 @@
-# LigaMagic
+# Questionário de Passo a Passo
 
 ## Visão Geral do Projeto
 
